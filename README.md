@@ -1,9 +1,13 @@
 # jQuery.scrollup
 A jQuery plugin to recreate the commonly used "pull up to refresh" found in mobile devices, but this time for the desktop browser.
 
-### Arguments
+![jQuery.scrollup Demo](http://i.imgur.com/dXxzlQP.gif)
+
+## Arguments
 ```javascript
-$(document).scrollup(selector, {
+
+// Create a new scrollup object on a specific element
+$(document).scrollup.create(selector, {
 
     // The HTML content that will be displayed when the user scrolls up
     content: '',
@@ -13,6 +17,9 @@ $(document).scrollup(selector, {
     
     // Milliseconds value before the scrollup content will be automatically removed. If left blank, the scrollup object won't be removed at all
     timeout: 3000,
+    
+    // Event triggered when a scrollup option has timed out
+    timedOut: function() { },
     
     // Event triggered when the creation of a scrollup object is started
     create: function() { },
@@ -36,9 +43,14 @@ $(document).scrollup(selector, {
     debug: false
     
 });
+
+// Remove the scrollup object created by 
+$(document).scrollupRemove(selector, options);
 ```
 
-### Example
+## Examples
+
+**Show FontAwesome refresh icon, then update UI element to show when it was last updated.**
 ```javascript
 $(document).scrollup('body', {
     content: '<i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i><span class="sr-only">Refreshing...</span>',
@@ -54,5 +66,30 @@ $(document).scrollup('body', {
          }
       });
     }
-});```
+});
+```
+**Remove the scrollup object before the timeout (ie. when you've successfully refreshed your data)**
+```javascript
+$(document).scrollup.create('body', {
+    content: '<i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i><span class="sr-only">Refreshing...</span>',
+    timeout: 5000,
+    created: function() {
+        // Perform action
+        setTimeout(function() {
+            console.log('Completed');
+            $(this).scrollup.remove('body');
+        }, 2000);
+    },
+    timedOut: function() {
+        console.log('timed out');
+    }
+});
+```
+
+**Display loading icon for 3 seconds**
+```javascript
+$(document).scrollup.create('#secondsection', {
+    content: '<i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i><span class="sr-only">Refreshing...</span>',
+    timeout: 3000
+});
 ```
