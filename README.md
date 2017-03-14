@@ -1,5 +1,5 @@
 # jQuery.scrollup
-A jQuery plugin to recreate the commonly used "pull up to refresh" found in mobile devices, but this time for the desktop browser.
+A jQuery plugin to recreate the commonly used "pull-to-refresh" found in mobile devices, but this time for the desktop browser.
 
 ![jQuery.scrollup Demo](http://i.imgur.com/dXxzlQP.gif)
 
