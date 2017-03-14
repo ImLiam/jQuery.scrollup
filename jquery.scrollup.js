@@ -78,5 +78,31 @@
     }
 
   }
+  
+  
+  
+  $.fn.scrollup.options = function(options) {
+
+    if (typeof options == 'undefined') {
+        options = {};
+    }
+
+    if (typeof options.content == 'undefined') {
+        options.content = '';
+    }
+
+    if (typeof options.class == 'undefined') {
+        options.class = 'scrollup';
+    }
+
+    if (typeof options.animationSpeed == 'undefined' || options.animationSpeed.toLowerCase() != 'fast' || options.animationSpeed.toLowerCase() != 'slow') {
+        options.animationSpeed = 'fast';
+    }
+    
+    return options;
+
+  }
+  
+
 
 }( jQuery ));
