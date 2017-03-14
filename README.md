@@ -3,7 +3,10 @@ A jQuery plugin to recreate the commonly used "pull up to refresh" found in mobi
 
 ![jQuery.scrollup Demo](http://i.imgur.com/dXxzlQP.gif)
 
-## Arguments
+## Options
+
+jQuery.scrollup allows you to define a variety of variables when using the plugin and hook into events that are triggered, to tailor the usage to your specific application.
+
 ```javascript
 
 // Options
@@ -39,19 +42,25 @@ var options = {
     // Speed of the animation when a scrollup object is createdo r removed. Valid options are 'slow' or 'fast'
     animationSpeed: 'fast',
     
-    // If enabled, debug messages will be displayed
+    // If enabled, debug messages for events will be displayed
     debug: false
     
 }
+```
 
+## Methods
+
+The methods that you can call to use and manipulate jQuery.scrollup. If no `options` parameter is passed to a method, it will use the default values.
+
+```javascript
 // Create a new scrollup object on a specific element
 $(document).scrollup.create(selector, options);
 
 // Remove an existing scrollup object
-$(document).scrollupRemove(selector, options);
+$(document).scrollup.remove(selector, options);
 
 // Get an object with all the required default parameters unless otherwise specified
-$(document).scrollupRemove(options);
+$(document).scrollup.options(options);
 ```
 
 ## Examples
