@@ -2,10 +2,11 @@
 
 (function ( $ ) {
 
+  $.fn.scrollup = {}
 
-  $.fn.scrollup = function(selector, options) {
+  $.fn.scrollup.create = function(selector, options) {
 
-    options = $(this).scrollupOptions(options);
+    options = $(this).scrollup.options(options);
 
     if (options.debug) {
         console.log('jQuery.scrollup initialised on selector: "'+selector+'"');
@@ -27,9 +28,16 @@
             if (options.created) { options.created(); }
 
             if (options.timeout) {
-                setTimeout(function() {
-                    $(this).scrollupRemove(selector, options);
+
+                var timer = setTimeout(function() {
+                    if (options.debug) { console.log('jQuery.scrollup object has timed out.'); }
+                    if (options.timedOut) { options.timedOut(); }
+
+                    $(this).scrollup.remove(selector, options);
                 }, options.timeout);
+
+                scrollupElement.attr('data-scrollup-timer', timer);
+
             }
 
         } else {
@@ -45,9 +53,9 @@
   
   
   
-  $.fn.scrollupRemove = function(selector, options) {
+  $.fn.scrollup.remove = function(selector, options) {
 
-    options = $(this).scrollupOptions(options);
+    options = $(this).scrollup.options(options);
     
     if (options.debug) { console.log('jQuery.scrollup object is being removed.'); }
     if (options.remove) { options.remove(); }
@@ -57,6 +65,7 @@
     if (scrollupElement.length) {
         $(scrollupElement).hide(options.animationSpeed, function() {
             $(scrollupElement).remove();
+            clearTimeout($(scrollupElement).attr('data-scrollup-timer'));
             if (options.debug) { console.log('jQuery.scrollup object has been removed.'); }
             if (options.removed) { options.removed(); }
             return true;
@@ -69,31 +78,3 @@
     }
 
   }
-  
-  
-  
-  $.fn.scrollupOptions = function(options) {
-
-    if (typeof options == 'undefined') {
-        options = {};
-    }
-
-    if (typeof options.content == 'undefined') {
-        options.content = '';
-    }
-
-    if (typeof options.class == 'undefined') {
-        options.class = 'scrollup';
-    }
-
-    if (typeof options.animationSpeed == 'undefined' || options.animationSpeed.toLowerCase() != 'fast' || options.animationSpeed.toLowerCase() != 'slow') {
-        options.animationSpeed = 'fast';
-    }
-    
-    return options;
-
-  }
-  
-
-
-}( jQuery ));
