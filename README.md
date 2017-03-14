@@ -6,8 +6,8 @@ A jQuery plugin to recreate the commonly used "pull up to refresh" found in mobi
 ## Arguments
 ```javascript
 
-// Create a new scrollup object on a specific element
-$(document).scrollup.create(selector, {
+// Options
+var options = {
 
     // The HTML content that will be displayed when the user scrolls up
     content: '',
@@ -42,10 +42,16 @@ $(document).scrollup.create(selector, {
     // If enabled, debug messages will be displayed
     debug: false
     
-});
+}
 
-// Remove the scrollup object created by 
+// Create a new scrollup object on a specific element
+$(document).scrollup.create(selector, options);
+
+// Remove an existing scrollup object
 $(document).scrollupRemove(selector, options);
+
+// Get an object with all the required default parameters unless otherwise specified
+$(document).scrollupRemove(options);
 ```
 
 ## Examples
