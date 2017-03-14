@@ -32,7 +32,7 @@
     $(selector).on('wheel', function(e) {
       if ($(this).scrollTop() == 0 && e.originalEvent.wheelDelta >= 0) {
 
-        if ($(this).has('.'+options.class).length == 0) {
+        if ($(this).children('.'+options.class).length == 0) {
 
             if (options.debug) { console.log('jQuery.scrollup object is being created.'); }
             if (options.create) { options.create(); }
